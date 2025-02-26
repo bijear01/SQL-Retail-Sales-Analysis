@@ -72,19 +72,20 @@ The following SQL queries were developed to answer specific business questions:
 
 1. **Write a SQL query to retrieve all columns for sales made on '2022-11-05**:
 ```sql
-select * from retail_sales 
-where sale_date = '2022-11-05';
+select *
+  from retail_sales 
+  where sale_date = '2022-11-05';
 ```
 
 2. **Write a SQL query to retrieve all transactions where the category is 'Clothing' and the quantity sold is more than 4 in the month of Nov-2022**:
 ```sql
 select *
-from retail_sales
-where 
-category = 'clothing'
-and 
-sale_date between  '2022-11-01' and  '2022-11-31'
-and quantiy>= 4;
+  from retail_sales
+  where 
+  category = 'clothing'
+  and 
+  sale_date between  '2022-11-01' and  '2022-11-31'
+  and quantiy>= 4;
 
 ```
 
@@ -102,8 +103,8 @@ select
 4. **Write a SQL query to find the average age of customers who purchased items from the 'Beauty' category.**:
 ```sql
    select 
-  round(avg(age),2) as avg_age 
-   from retail_sales
+     round(avg(age),2) as avg_age 
+     from retail_sales
    where category ='beauty';
 ```
 
@@ -125,13 +126,13 @@ WHERE total_sale > 1000
 7. **Write a SQL query to calculate the average sale for each month. Find out best selling month in each year**:
 ```sql
  select
-  year,
-  month,
-  avg_sale
-from
+    year,
+    month,
+  , avg_sale
+ from
   (
      select
-        extract(year from sale_date) as year,
+         extract(year from sale_date) as year,
          extract(month from sale_date) as month,
          round(avg(total_sale),2) as avg_sale,
          rank() over(partition by extract(year from sale_date) order by avg(total_sale) desc) as classification
@@ -147,10 +148,10 @@ from
 SELECT 
     customer_id,
     SUM(total_sale) as total_sales
-FROM retail_sales
-GROUP BY 1
-ORDER BY 2 DESC
-LIMIT 5
+   FROM retail_sales
+   GROUP BY 1
+   ORDER BY 2 DESC
+   LIMIT 5
 ```
 
 9. **Write a SQL query to find the number of unique customers who purchased items from each category.**:
@@ -158,8 +159,8 @@ LIMIT 5
 SELECT 
     category,    
     COUNT(DISTINCT customer_id) as cnt_unique_cs
-FROM retail_sales
-GROUP BY category
+    FROM retail_sales
+    GROUP BY category
 ```
 
 10. **Write a SQL query to create each shift and number of orders (Example Morning <12, Afternoon Between 12 & 17, Evening >17)**:
